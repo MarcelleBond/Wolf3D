@@ -35,12 +35,13 @@ int butt(int but)
 
 int keywork(int keycode)
 {
+  printf("%d\n",keycode);
 
   if (keycode == 53 || keycode == 65307)
     exit(0);
   return(0);
 }
-int main(int argc, char **argv)
+int main(/* int argc, char **argv */)
 {
   t_player p;
   void *mxl;
@@ -56,7 +57,7 @@ int main(int argc, char **argv)
   int ceiling;
   int floors;
 
-  p.playerA = 0.0;
+  p.playerA = 45.0;
   p.playerY = 12.0;
   p.playerX = 12.0;
   hit = 0;
@@ -97,7 +98,7 @@ int main(int argc, char **argv)
       else if (y > ceiling && y <= floors)
         mlx_pixel_put(mxl, win, x, y, 0x66FFF);
       else
-        mlx_pixel_put(mxl, win, y, x, 0xFFF66);
+        mlx_pixel_put(mxl, win, x, y, 0xFFF66);
     }
   }
   mlx_hook(win, 2, 0, keywork, 0);

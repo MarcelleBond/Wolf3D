@@ -6,8 +6,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 500
+# define HEIGHT 500
 # define FOV 0.7853975
 
 typedef struct	s_player
