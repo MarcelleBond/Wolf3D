@@ -33,12 +33,16 @@ int butt(int but)
   exit(0);
 }
 
-int keywork(int keycode)
+int keywork(int keycode, t_player *p)
 {
   printf("%d\n",keycode);
 
   if (keycode == 53 || keycode == 65307)
     exit(0);
+  if (keycode == 0)
+    p->playerA -= (0.1f);
+  if (keycode == 2)
+    p->playerA += (0.1f);
   return(0);
 }
 int main(/* int argc, char **argv */)
@@ -57,7 +61,7 @@ int main(/* int argc, char **argv */)
   int ceiling;
   int floors;
 
-  p.playerA = 45.0;
+  p.playerA = 0.0;
   p.playerY = 12.0;
   p.playerX = 12.0;
   hit = 0;
@@ -72,7 +76,7 @@ int main(/* int argc, char **argv */)
     eyeY = cosf(rayA);
     while (hit != 1 && dist < depth)
     {
-      dist += 1.0f;
+      dist += 0.1f;
       testX = (int)(p.playerX + eyeX * dist);
       testY = (int)(p.playerY + eyeY * dist);
 
@@ -89,7 +93,7 @@ int main(/* int argc, char **argv */)
         }
       }
     }
-    ceiling = fabsf((float)(HEIGHT / 2.0f) - (HEIGHT / dist));
+    ceiling = (float)(HEIGHT / 2.0f) - HEIGHT / ((float)dist);
     floors = HEIGHT - ceiling;
     for (int y = 0; y < HEIGHT; y++)
     {
@@ -101,7 +105,7 @@ int main(/* int argc, char **argv */)
         mlx_pixel_put(mxl, win, x, y, 0xFFF66);
     }
   }
-  mlx_hook(win, 2, 0, keywork, 0);
+  // mlx_hook(win, 2, 0, keywork, &p);
   mlx_hook(win, 17, 0, butt, 0);
   mlx_loop(mxl);
   return 0;
