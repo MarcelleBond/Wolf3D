@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf3d.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbond <mbond@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 09:33:42 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/30 16:39:31 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/30 20:40:03 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include "libft/libft.h"
-# define WIDTH 1000
-# define HEIGHT 1000
+# define WIDTH 1300
+# define HEIGHT 600
 # define FOV 0.7853975
 
 typedef struct	s_player
@@ -72,6 +72,6 @@ typedef struct	s_wolf
 }				t_wolf;
 
 void			map_draw(t_wolf *g);
-t_wolf			map_read(char *file, t_wolf w);	
+t_wolf			map_read(char *file, t_wolf w);
 
 #endif

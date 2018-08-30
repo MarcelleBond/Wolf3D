@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbond <mbond@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 11:22:11 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/30 16:50:55 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/30 20:33:06 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void map_draw(t_wolf *g)
 		else if (m.dist < m.depth)
 			m.shade = 0x003fa5;
 		else
-			m.shade = 0x000000;
+			m.shade = 0xFF66FF;
 		for (int y = 0; y < HEIGHT; y++)
 		{
 			if (y < m.ceiling)
