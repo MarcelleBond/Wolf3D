@@ -6,13 +6,13 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 11:22:11 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/31 14:59:05 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/31 16:01:20 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		color(t_rays m)
+int		color_w(t_rays m)
 {
 	if (m.dist <= m.depth / 4.0)
 		return (0x0061ff);
@@ -24,6 +24,23 @@ int		color(t_rays m)
 		return (0x003fa5);
 	else
 		return (0x46494f);
+}
+
+int		color_f(int y)
+{
+	float f;
+
+	f = 1.0 - (((float)y - HEIGHT / 2.0) / ((float)HEIGHT / 2.0));
+	if (f < 0.25)
+		return (0xaa0000);
+	else if (f < 0.5)
+		return (0xa30000);
+	else if (f < 0.75)
+		return (0x840000);
+	else if (f < 0.9)
+		return (0x7c0000);
+	else
+		return (0x960000);
 }
 
 t_rays	findwall(t_rays m, t_wolf *g)
@@ -60,9 +77,9 @@ void	draw(t_rays m, t_wolf *g, int x)
 		if (y < m.ceiling)
 			mlx_pixel_put(g->w.mxl, g->w.win, x, y, 0x46494f);
 		else if (y > m.ceiling && y <= m.floors)
-			mlx_pixel_put(g->w.mxl, g->w.win, x, y, m.shade);
+			mlx_pixel_put(g->w.mxl, g->w.win, x, y, color_w(m));
 		else
-			mlx_pixel_put(g->w.mxl, g->w.win, x, y, 0x960000);
+			mlx_pixel_put(g->w.mxl, g->w.win, x, y, color_f(y));
 		y++;
 	}
 }
@@ -85,7 +102,6 @@ void	map_draw(t_wolf *g)
 		m = findwall(m, g);
 		m.ceiling = (HEIGHT / 2.0) - HEIGHT / m.dist;
 		m.floors = HEIGHT - m.ceiling;
-		m.shade = color(m);
 		draw(m, g, x);
 		x++;
 	}

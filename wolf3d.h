@@ -6,7 +6,7 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 09:33:42 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/31 15:08:29 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/31 16:07:30 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct	s_wolf
 	t_work		w;
 	t_player	p;
 	t_rays		r;
-	int			map[500][500];
+	int			map[1000][1000];
 	int			cols;
 	int			rows;
 }				t_wolf;
