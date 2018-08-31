@@ -6,7 +6,7 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 09:34:14 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/31 10:36:26 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/31 20:33:57 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int		main(int argc, char **argv)
 		w.cols = 1;
 		w = map_read(argv[1], w);
 		w.p.player_a = 0.00;
-		w.p.player_y = 12.0;
-		w.p.player_x = 12.0;
-		w.r.depth = 24;
+		w.p.player_y = w.rows / 2;
+		w.p.player_x = w.cols / 2;
+		w.r.depth = (w.cols > w.rows) ? w.cols : w.rows;
 		w.w.mxl = mlx_init();
 		w.w.win = mlx_new_window(w.w.mxl, WIDTH, HEIGHT, "WOLF3D");
 		mlx_string_put(w.w.mxl, w.w.win, WIDTH / 2, HEIGHT / 2, 0xFFFFFF,
 		"start");
-		mlx_hook(w.w.win, 2, 0, keywork, &w);
-		/* mlx_key_hook(w.w.win,keywork, &w); */
+		/* mlx_hook(w.w.win, 2, 0, keywork, &w); */
+		mlx_key_hook(w.w.win,keywork, &w);
 		mlx_hook(w.w.win, 17, 0, butt, 0);
 		mlx_loop(w.w.mxl);
 	}
