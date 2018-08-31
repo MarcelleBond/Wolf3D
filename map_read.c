@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   map_read.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mbond <mbond@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 11:59:34 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/30 13:27:42 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/31 11:27:58 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		map_check(char *file)
+int				map_check(char *file)
 {
 	int		fd;
 	char	*check;
@@ -35,6 +35,29 @@ int		map_check(char *file)
 		exit(1);
 	}
 	return (fd);
+}
+
+int				**map_malloc(int y, int x)
+{
+	int		**map;
+	int		i;
+
+	i = 0;
+	if (!(map = (int**)malloc(sizeof(map) * y + 1)))
+	{
+		ft_putendl("failed to malloc for map");
+		exit(1);
+	}
+	while (i < y)
+	{
+		if (!(map[i] = (int *)malloc(sizeof(int) * x)))
+		{
+			ft_putendl("failed to malloc for map");
+			exit(1);
+		}
+		i++;
+	}
+	return (map);
 }
 
 t_wolf			map_read(char *file, t_wolf w)

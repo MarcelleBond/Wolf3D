@@ -6,7 +6,7 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 09:33:42 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/30 20:40:03 by mbond            ###   ########.fr       */
+/*   Updated: 2018/08/31 15:08:29 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define WOLF3D_H
 
 # include <stdio.h>
-// # include <SDL2/SDL.h>
 # include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
@@ -25,9 +24,9 @@
 
 typedef struct	s_player
 {
-	double playerX;
-	double playerY;
-	double playerA;
+	double player_x;
+	double player_y;
+	double player_a;
 }				t_player;
 
 typedef struct	s_work
@@ -48,13 +47,13 @@ typedef struct	s_read
 
 typedef struct	s_rays
 {
-	double		rayA;
+	double		ray_a;
 	double		dist;
-	double		eyeX;
-	double		eyeY;
+	double		eye_x;
+	double		eye_y;
 	double		depth;
-	double		testX;
-	double		testY;
+	double		test_x;
+	double		test_y;
 	int			hit;
 	double		ceiling;
 	double		floors;
@@ -66,12 +65,16 @@ typedef struct	s_wolf
 	t_work		w;
 	t_player	p;
 	t_rays		r;
-	int			map[24][24];
+	int			map[500][500];
 	int			cols;
 	int			rows;
 }				t_wolf;
 
 void			map_draw(t_wolf *g);
 t_wolf			map_read(char *file, t_wolf w);
+void			m_forward(t_wolf *w);
+void			m_backward(t_wolf *w);
+void			r_right(t_wolf *w);
+void			r_left(t_wolf *w);
 
 #endif

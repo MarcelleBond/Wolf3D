@@ -1,22 +1,18 @@
-NAME = fdf
+NAME = wolf3d
 COMP = gcc
 FLAGS = -Wall -Werror -Wextra -std=c99
-LIB_F = -I libft/ 
+LIB_F = -I libft/
 LIB_FA = libft/libft.a
-LIB_G = -lm -L libft/ -lft -L minilibxOSX -lmlx -framework OpenGL -framework Appkit
+LIB_G = -lm -L libft/ -lft  -lmlx -framework OpenGL -framework Appkit
 FUNCS = main \
-		draw_calc \
-		error \
-		line_draw \
 		map_read \
-		preset \
-		scale_and_rotate \
-		keybord_work \
+		map_draw \
+		movement \
 
 SRCC = $(addsuffix .c, $(FUNCS))
 SRCO = $(addsuffix .o, $(FUNCS))
 
-HF = libft/libft.h 
+HF = libft/libft.h
 LIB = ./libft/libft.a
 INCLUDES = -I./libft
 all: $(NAME)
