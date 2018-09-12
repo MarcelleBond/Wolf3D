@@ -6,13 +6,13 @@
 #    By: mbond <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/28 16:20:23 by mbond             #+#    #+#              #
-#    Updated: 2018/06/25 10:29:12 by mbond            ###   ########.fr        #
+#    Updated: 2018/09/03 08:10:04 by mbond            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 COMP = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -std=c99
 FUNCS = ft_atoi \
 ft_bzero \
 ft_intlen \
