@@ -6,7 +6,7 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 11:59:34 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/31 11:27:58 by mbond            ###   ########.fr       */
+/*   Updated: 2018/09/07 08:42:22 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,15 @@ int				map_check(char *file)
 	return (fd);
 }
 
-int				**map_malloc(int y, int x)
+void			emptymap(int empty)
 {
-	int		**map;
-	int		i;
-
-	i = 0;
-	if (!(map = (int**)malloc(sizeof(map) * y + 1)))
+	if (empty == 0)
 	{
-		ft_putendl("failed to malloc for map");
+		ft_putendl("EMPTY FILE");
 		exit(1);
 	}
-	while (i < y)
-	{
-		if (!(map[i] = (int *)malloc(sizeof(int) * x)))
-		{
-			ft_putendl("failed to malloc for map");
-			exit(1);
-		}
-		i++;
-	}
-	return (map);
+	else
+		return ;
 }
 
 t_wolf			map_read(char *file, t_wolf w)
@@ -66,6 +54,7 @@ t_wolf			map_read(char *file, t_wolf w)
 
 	run.py = 0;
 	run.fd = map_check(file);
+	run.empty = 0;
 	while ((run.ret = get_next_line(run.fd, &run.line)) > 0)
 	{
 		run.px = 0;
@@ -78,7 +67,9 @@ t_wolf			map_read(char *file, t_wolf w)
 		run.py += 1;
 		ft_freesplit((void **)run.split);
 		free(run.line);
+		run.empty = 1;
 	}
+	emptymap(run.empty);
 	close(run.fd);
 	w.rows = run.py;
 	w.cols = run.px;

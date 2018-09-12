@@ -6,35 +6,45 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 09:34:14 by mbond             #+#    #+#             */
-/*   Updated: 2018/08/31 20:33:57 by mbond            ###   ########.fr       */
+/*   Updated: 2018/09/10 12:09:19 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf3d.h"
 
-int		butt(int but)
+void	cleanup(t_wolf *w)
 {
-	(void)but;
-	exit(0);
+	SDL_DestroyRenderer(w->renderer);
+	SDL_DestroyWindow(w->win);
+}
+
+void	set_up_window(t_wolf *w)
+{
+	SDL_Init(0);
+	w->win = SDL_CreateWindow("WOLF3D", 100, 100,
+		WIDTH, HEIGHT, 0);
+	w->renderer = SDL_CreateRenderer(w->win, 0, 0);
+}
+
+void	placeplayer(t_wolf *w)
+{
+	w->p.player_a = 0.00;
+	w->p.player_y = w->rows / 2;
+	w->p.player_x = w->cols / 2;
+	w->r.depth = (w->cols > w->rows) ? w->cols : w->rows;
 }
 
 int		keywork(int keycode, t_wolf *w)
 {
-	printf("%d\n", keycode);
-	if (keycode == 11 || keycode == 98)
-	{
-		mlx_clear_window(w->w.mxl, w->w.win);
-		map_draw(w);
-	}
-	if (keycode == 53 || keycode == 65307)
+	if (keycode == SDLK_ESCAPE)
 		exit(0);
-	if (keycode == 0 || keycode == 97)
+	if (keycode == SDLK_a)
 		r_left(w);
-	if (keycode == 2 || keycode == 100)
+	if (keycode == SDLK_d)
 		r_right(w);
-	if (keycode == 13 || keycode == 119)
+	if (keycode == SDLK_w)
 		m_forward(w);
-	if (keycode == 1 || keycode == 115)
+	if (keycode == SDLK_s)
 		m_backward(w);
 	return (0);
 }
@@ -45,24 +55,25 @@ int		main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		w.cols = 1;
+		w.running = 1;
 		w = map_read(argv[1], w);
-		w.p.player_a = 0.00;
-		w.p.player_y = w.rows / 2;
-		w.p.player_x = w.cols / 2;
-		w.r.depth = (w.cols > w.rows) ? w.cols : w.rows;
-		w.w.mxl = mlx_init();
-		w.w.win = mlx_new_window(w.w.mxl, WIDTH, HEIGHT, "WOLF3D");
-		mlx_string_put(w.w.mxl, w.w.win, WIDTH / 2, HEIGHT / 2, 0xFFFFFF,
-		"start");
-		/* mlx_hook(w.w.win, 2, 0, keywork, &w); */
-		mlx_key_hook(w.w.win,keywork, &w);
-		mlx_hook(w.w.win, 17, 0, butt, 0);
-		mlx_loop(w.w.mxl);
+		set_up_window(&w);
+		placeplayer(&w);
+		while (w.running)
+		{
+			while (SDL_PollEvent(&w.event))
+			{
+				if (w.event.type == SDL_QUIT)
+					w.running = 0;
+				else if (w.event.type == SDL_KEYUP)
+					keywork(w.event.key.keysym.sym, &w);
+			}
+			map_draw(&w);
+			SDL_RenderPresent(w.renderer);
+		}
+		cleanup(&w);
 	}
-	else if (argc < 2)
-		ft_putendl("NO MAP FOUND");
-	else if (argc > 2)
-		ft_putendl("TO MANY INPUTS");
+	else
+		ft_putendl("ERROR");
 	return (0);
 }
