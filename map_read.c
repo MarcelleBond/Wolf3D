@@ -6,7 +6,7 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 11:59:34 by mbond             #+#    #+#             */
-/*   Updated: 2018/09/07 08:42:22 by mbond            ###   ########.fr       */
+/*   Updated: 2018/09/14 09:28:47 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int				map_check(char *file)
 		ft_putendl("Error: Invalid file");
 		exit(1);
 	}
-	if ((strcmp(check, ".fdf") != 0))
+	if ((ft_strcmp(check, ".fdf") != 0))
 	{
 		ft_putendl("Error: Invalid file");
 		exit(1);
