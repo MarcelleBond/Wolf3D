@@ -6,7 +6,7 @@
 /*   By: mbond <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/30 11:22:11 by mbond             #+#    #+#             */
-/*   Updated: 2018/09/10 11:40:53 by mbond            ###   ########.fr       */
+/*   Updated: 2018/09/28 09:24:51 by mbond            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	draw(t_rays m, t_wolf *g, int x)
 	w.y = 0;
 	while (w.y < HEIGHT)
 	{
-		w.i = x * g->w.bpp + w.y * g->w.sizeline;
 		if (w.y < m.ceiling)
 		{
 			SDL_SetRenderDrawColor(g->renderer, 70, 73, 79, 255);
